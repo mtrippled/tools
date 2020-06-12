@@ -64,13 +64,14 @@ def main():
         if portion['validated'] is not True:
             sys.stderr.write('Ledger is not validated.\n')
             return 1
-        if 'marker' not in portion:
-            break
-        marker = portion['marker']
 
         for obj in portion['state']:
             if obj['LedgerEntryType'] == 'AccountRoot':
                 total_drops += int(obj['Balance'])
+
+        if 'marker' not in portion:
+            break
+        marker = portion['marker']
 
     total_drops = str(total_drops)
     if len(total_drops) < 7:
